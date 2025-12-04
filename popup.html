@@ -24,13 +24,28 @@
         </label>
 
         <label class="checkbox-row">
-          <input type="checkbox" id="dyslexiaFont">
-          <span>Police adaptée à la dyslexie</span>
+            <table>
+                <tr>
+                    <td><span>Police adaptée à la dyslexie</span></td>
+                    <td>
+                        <input type="checkbox" id="dyslexiaFont" class="checkbox">
+                        <div class="slider"></div>
+                    </td>
+                </tr>
+            </table>
+
         </label>
 
         <label class="checkbox-row">
-          <input type="checkbox" id="highContrast">
-          <span>Mode contraste élevé</span>
+            <table>
+                <tr>
+                    <td><span>Mode contraste élevé</span></td>
+                    <td><input type="range" id="highContrast" ></td>
+                </tr>
+            </table>
+            
+          
+          
         </label>
 
         <button id="saveSettings" class="gaul-button">Enregistrer les paramètres</button>

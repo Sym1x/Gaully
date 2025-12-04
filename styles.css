@@ -66,7 +66,7 @@ label {
 
 .checkbox-row {
   display: flex;
-  align-items: center;
+  align-items: left;
   gap: 8px;
   font-size: 14px;
 }
@@ -98,3 +98,50 @@ label {
   height: 16px;
   color: green;
 }
+
+:root {
+  --slider-size: 0.5; 
+}
+
+.checkbox {
+  display: none;
+}
+
+.slider {
+  width: calc(60px * var(--slider-size));
+  height: calc(30px * var(--slider-size));
+  background-color: lightgray;
+  border-radius: calc(20px * var(--slider-size));
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: calc(4px * var(--slider-size)) solid transparent;
+  transition: .3s;
+  box-shadow: 0 0 calc(10px * var(--slider-size)) 0 rgb(0, 0, 0, 0.25) inset;
+  cursor: pointer;
+}
+
+.slider::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transform: translateX(calc(-30px * var(--slider-size)));
+  border-radius: calc(20px * var(--slider-size));
+  transition: .3s;
+  box-shadow: 0 0 calc(10px * var(--slider-size)) calc(3px * var(--slider-size)) rgb(0, 0, 0, 0.25);
+}
+
+.checkbox:checked ~ .slider::before {
+  transform: translateX(calc(30px * var(--slider-size)));
+}
+
+.checkbox:checked ~ .slider {
+  background-color: #2196F3;
+}
+
+.checkbox:active ~ .slider::before {
+  transform: translate(0);
+}
+
