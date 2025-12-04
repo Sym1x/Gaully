@@ -1,21 +1,52 @@
 body {
-  width: 200px;
-  padding: 10px;
+  width: 260px;
   font-family: Arial, sans-serif;
+  padding: 12px;
+  background: #faf7e8;
 }
-select, button {
+
+.title {
+  text-align: left;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.section {
+  border: 2px solid #5f3a1a;
+  background: #fffdf4;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.section label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.cb {
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
   width: 100%;
-  margin-top: 10px;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-button {
-  background: #4c8bf5;
-  color: white;
+  padding: 8px;
+  background: #7a4f1e;
+  color: #fff;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
-button:hover {
-  background: #3b6fd1;
+.btn:hover {
+  background: #5f3a16;
+}
+
+#status {
+  height: 16px;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px;
+  color: green;
 }

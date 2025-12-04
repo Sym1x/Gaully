@@ -1,17 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <title>Gaulish Sovereignty</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Color Blind Mode</h1>
-    <select id="modeSelect">
+
+  <h1 class="h2">Accessibilité</h1>
+  <div class="section">
+
+    <label>
+      <span>Colorblind Mode:</span>
+      <select id="colorblindMode">
         <option value="none">None</option>
         <option value="protanopia">Protanopia</option>
         <option value="deuteranopia">Deuteranopia</option>
         <option value="tritanopia">Tritanopia</option>
-    </select>
-    <button id="applyBtn">Apply</button>
-</body>
+        <option value="achromatopsia">Achromatopsia (grayscale)</option>
+      </select>
+    </label>
+
+    <label class="cb">
+      <input type="checkbox" id="dyslexiaFont">
+      <span>Dyslexia-Friendly Font</span>
+    </label>
+
+    <label class="cb">
+      <input type="checkbox" id="highContrast">
+      <span>High Contrast Mode</span>
+    </label>
+
+    <button id="saveSettings" class="btn">Save Settings</button>
+    <div id="status"></div>
+
+  </div>
+
 <script src="popup.js"></script>
+</body>
 </html>

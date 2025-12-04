@@ -1,15 +1,26 @@
-document.getElementById("applyBtn").addEventListener("click", async () => {
-    const mode = document.getElementById("modeSelect").value;
+document.addEventListener("DOMContentLoaded", async () => {
+  const data = await chrome.storage.sync.get({
+    colorblindMode: "none",
+    dyslexiaFont: false,
+    highContrast: false
+  });
 
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: setColorBlindMode,
-        args: [mode]
-    });
+  document.getElementById("colorblindMode").value = data.colorblindMode;
+  document.getElementById("dyslexiaFont").checked = data.dyslexiaFont;
+  document.getElementById("highContrast").checked = data.highContrast;
 });
 
-function setColorBlindMode(mode) {
-    document.dispatchEvent(new CustomEvent("cb-mode-change", { detail: mode }));
-}
+// Save settings
+document.getElementById("saveSettings").addEventListener("click", async () => {
+  const settings = {
+    colorblindMode: document.getElementById("colorblindMode").value,
+    dyslexiaFont: document.getElementById("dyslexiaFont").checked,
+    highContrast: document.getElementById("highContrast").checked
+  };
+
+  await chrome.storage.sync.set(settings);
+
+  const status = document.getElementById("status");
+  status.textContent = "Saved!";
+  setTimeout(() => status.textContent = "", 1500);
+});

@@ -1,13 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "Color Blind Mode",
+  "name": "Gaully Extension",
+  "description": "A jolly Gaully!",
   "version": "1.0",
-  "description": "Apply color‑blindness simulation filters to any website.",
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Color Blind Modes"
+    "default_icon": {
+    }
   },
-  "permissions": ["storage", "scripting", "activeTab"],
+  "icons": {
+  },
+  "permissions": [
+    "storage",
+    "scripting",
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
