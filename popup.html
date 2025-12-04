@@ -2,37 +2,49 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Gaulish Sovereignty</title>
+  <title>Souveraineté Gauloise</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <h1 class="h2">Accessibilité</h1>
-  <div class="section">
+  <div class="gaul-container">
 
-    <label>
-      <span>Colorblind Mode:</span>
-      <select id="colorblindMode">
-        <option value="none">None</option>
-        <option value="protanopia">Protanopia</option>
-        <option value="deuteranopia">Deuteranopia</option>
-        <option value="tritanopia">Tritanopia</option>
-        <option value="achromatopsia">Achromatopsia (grayscale)</option>
-      </select>
-    </label>
+    <div class="dropdown-section">
+      <button class="dropdown-btn">Accessibilité</button>
+      <div class="dropdown-content">
+        <label>
+          <span>Mode daltonien :</span>
+          <select id="colorblindMode" class="gaul-input">
+            <option value="none">Aucun</option>
+            <option value="protanopia">Protanopie</option>
+            <option value="deuteranopia">Deutéranopie</option>
+            <option value="tritanopia">Tritanopie</option>
+            <option value="achromatopsia">Achromatopsie (niveaux de gris)</option>
+          </select>
+        </label>
 
-    <label class="cb">
-      <input type="checkbox" id="dyslexiaFont">
-      <span>Dyslexia-Friendly Font</span>
-    </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="dyslexiaFont">
+          <span>Police adaptée à la dyslexie</span>
+        </label>
 
-    <label class="cb">
-      <input type="checkbox" id="highContrast">
-      <span>High Contrast Mode</span>
-    </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="highContrast">
+          <span>Mode contraste élevé</span>
+        </label>
 
-    <button id="saveSettings" class="btn">Save Settings</button>
-    <div id="status"></div>
+        <button id="saveSettings" class="gaul-button">Enregistrer les paramètres</button>
+        <div id="status"></div>
+      </div>
+    </div>
+
+    <!-- Future Section Dropdown -->
+    <div class="dropdown-section">
+      <button class="dropdown-btn">Autres fonctionnalités</button>
+      <div class="dropdown-content">
+        <p>Les futurs outils et paramètres apparaîtront ici.</p>
+      </div>
+    </div>
 
   </div>
 

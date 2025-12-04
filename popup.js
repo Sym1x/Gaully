@@ -1,3 +1,10 @@
+document.querySelectorAll('.dropdown-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const content = btn.nextElementSibling;
+    content.style.display = content.style.display === 'flex' ? 'none' : 'flex';
+  });
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
   const data = await chrome.storage.sync.get({
     colorblindMode: "none",
@@ -10,7 +17,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("highContrast").checked = data.highContrast;
 });
 
-// Save settings
 document.getElementById("saveSettings").addEventListener("click", async () => {
   const settings = {
     colorblindMode: document.getElementById("colorblindMode").value,
@@ -21,6 +27,6 @@ document.getElementById("saveSettings").addEventListener("click", async () => {
   await chrome.storage.sync.set(settings);
 
   const status = document.getElementById("status");
-  status.textContent = "Saved!";
+  status.textContent = "Paramètres enregistrés !";
   setTimeout(() => status.textContent = "", 1500);
 });
