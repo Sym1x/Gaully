@@ -1,56 +1,72 @@
-chrome.storage.sync.get({
-  colorblindMode: "none",
-  dyslexiaFont: false,
-  highContrast: false,
-  ttsOnSelect: false
-}, (settings) => {
-  document.getElementById("colorblindMode").value = settings.colorblindMode;
-  document.getElementById("dyslexiaFont").checked = settings.dyslexiaFont;
-  document.getElementById("highContrast").checked = settings.highContrast;
-  document.getElementById("ttsOnSelect").checked = settings.ttsOnSelect;
-});
-
-// Toggle sections
-document.querySelectorAll('.section-header').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const content = btn.nextElementSibling;
-    content.classList.toggle('open');
-  });
-});
-
-// Save & apply
-document.getElementById("saveSettings").addEventListener("click", async () => {
-  const settings = {
-    colorblindMode: document.getElementById("colorblindMode").value,
-    dyslexiaFont: document.getElementById("dyslexiaFont").checked,
-    highContrast: document.getElementById("highContrast").checked,
-    ttsOnSelect: document.getElementById("ttsOnSelect").checked
-  };
-
-  await chrome.storage.sync.set(settings);
-
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: applySettingsFromPopup,
-    args: [settings]
+document.addEventListener('DOMContentLoaded', function() {
+  chrome.storage.sync.get([
+    'colorblindMode',
+    'dyslexiaFont',
+    'highContrast',
+    'ttsOnSelect'
+  ], function(settings) {
+    if (settings.colorblindMode) {
+      document.getElementById('colorblindMode').value = settings.colorblindMode;
+    }
+    if (settings.dyslexiaFont !== undefined) {
+      document.getElementById('dyslexiaFont').checked = settings.dyslexiaFont;
+    }
+    if (settings.highContrast !== undefined) {
+      document.getElementById('highContrast').checked = settings.highContrast;
+    }
+    if (settings.ttsOnSelect !== undefined) {
+      document.getElementById('ttsOnSelect').checked = settings.ttsOnSelect;
+    }
   });
 
-  const status = document.getElementById("status");
-  status.textContent = "Paramètres appliqués";
-  setTimeout(() => status.textContent = "", 2000);
-});
+  document.querySelectorAll('.section-header').forEach(button => {
+    button.addEventListener('click', function() {
+      const content = this.nextElementSibling;
+      content.style.display = content.style.display === 'none' ? 'block' : 'none';
+    });
+  });
 
-// TTS controls
-document.getElementById("readPage").addEventListener("click", async () => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  chrome.tabs.sendMessage(tab.id, { action: "readFullPage" });
-});
+  document.getElementById('saveSettings').addEventListener('click', function() {
+    const settings = {
+      colorblindMode: document.getElementById('colorblindMode').value,
+      dyslexiaFont: document.getElementById('dyslexiaFont').checked,
+      highContrast: document.getElementById('highContrast').checked,
+      ttsOnSelect: document.getElementById('ttsOnSelect').checked
+    };
 
-document.getElementById("stopTts").addEventListener("click", () => {
-  chrome.tts.stop();
-});
+    chrome.storage.sync.set(settings, function() {
+      const status = document.getElementById('status');
+      status.textContent = 'Paramètres sauvegardés!';
+      status.style.color = '#4CAF50';
+      
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        if (tabs[0]) {
+          chrome.tabs.sendMessage(tabs[0].id, {
+            action: 'applySettings',
+            settings: settings
+          });
+        }
+      });
+      
+      setTimeout(() => {
+        status.textContent = '';
+      }, 2000);
+    });
+  });
 
-function applySettingsFromPopup(s) {
-  document.dispatchEvent(new CustomEvent("gaully-apply-settings", { detail: s }));
-}
+  document.getElementById('readPage').addEventListener('click', function() {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      if (tabs[0]) {
+        chrome.tabs.sendMessage(tabs[0].id, {action: 'readPage'});
+      }
+    });
+  });
+
+  document.getElementById('stopTts').addEventListener('click', function() {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      if (tabs[0]) {
+        chrome.tabs.sendMessage(tabs[0].id, {action: 'stopTts'});
+      }
+    });
+  });
+});

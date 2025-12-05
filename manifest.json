@@ -1,21 +1,20 @@
 {
   "manifest_version": 3,
   "name": "Gaully Accessibility",
-  "description": "Accessibility tools: color-blindness simulation, dyslexia font, high contrast, and text-to-speech.",
-  "version": "2.0",
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "Gaully Accessibility"
-  },
+  "version": "1.0",
+  "description": "Outils d'accessibilité pour améliorer la navigation web",
   "permissions": [
     "storage",
-    "scripting",
     "activeTab",
-    "tts"
+    "scripting"
   ],
   "host_permissions": [
     "<all_urls>"
   ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Gaully Accessibility"
+  },
   "background": {
     "service_worker": "background.js"
   },
@@ -28,7 +27,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["filters.svg"],
+      "resources": ["styles.css"],
       "matches": ["<all_urls>"]
     }
   ]
