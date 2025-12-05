@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Gaully Accessibility",
-  "version": "1.0",
+  "version": "1.42",
   "description": "Outils d'accessibilité pour améliorer la navigation web",
   "permissions": [
     "storage",
@@ -13,7 +13,10 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Gaully Accessibility"
+    "default_title": "Gaully Accessibility",
+    "default_icon":{
+      "128": "icon128.png"
+    }
   },
   "background": {
     "service_worker": "background.js"

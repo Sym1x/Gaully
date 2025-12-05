@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Load saved settings
   chrome.storage.sync.get([
     'colorblindMode',
     'dyslexiaFont',
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // Toggle section visibility
   document.querySelectorAll('.section-header').forEach(button => {
     button.addEventListener('click', function() {
       const content = this.nextElementSibling;
@@ -26,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // Save and apply settings
   document.getElementById('saveSettings').addEventListener('click', function() {
     const settings = {
       colorblindMode: document.getElementById('colorblindMode').value,
@@ -34,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ttsOnSelect: document.getElementById('ttsOnSelect').checked
     };
 
+    // Save to storage
     chrome.storage.sync.set(settings, function() {
       const status = document.getElementById('status');
       status.textContent = 'Paramètres sauvegardés!';
@@ -54,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // TTS
   document.getElementById('readPage').addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       if (tabs[0]) {

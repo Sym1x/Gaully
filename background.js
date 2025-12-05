@@ -1,8 +1,9 @@
 chrome.runtime.onInstalled.addListener(() => {
   console.log("Gaully installé avec succès !");
 });
-// initialization
+// Initialize extension
 chrome.runtime.onInstalled.addListener(function() {
+  // Set default settings
   chrome.storage.sync.set({
     colorblindMode: 'none',
     dyslexiaFont: false,
@@ -11,7 +12,7 @@ chrome.runtime.onInstalled.addListener(function() {
   });
 });
 
-// inject content script into all tabs when they load
+// Inject content script into all tabs when they load
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (changeInfo.status === 'complete' && tab.url && !tab.url.startsWith('chrome://')) {
     chrome.scripting.executeScript({

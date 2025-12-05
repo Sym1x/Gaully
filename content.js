@@ -1,4 +1,4 @@
-// Wait for the page to fully load
+
 window.addEventListener('load', function() {
   // Apply saved settings on page load
   chrome.storage.sync.get([
@@ -12,32 +12,27 @@ window.addEventListener('load', function() {
     }
   });
   
-  // Listen for selection events for TTS
+  // Listen for selection events
   document.addEventListener('mouseup', handleTextSelection);
 });
 
 // Function to apply all settings
 function applySettings(settings) {
-  // Remove any existing style elements
   removeExistingStyles();
   
-  // Apply colorblind simulation
   if (settings.colorblindMode && settings.colorblindMode !== 'none') {
     applyColorblindFilter(settings.colorblindMode);
   }
   
-  // Apply dyslexia font
   if (settings.dyslexiaFont) {
     applyDyslexiaFont();
   }
   
-  // Apply high contrast
   if (settings.highContrast) {
     applyHighContrast();
   }
 }
 
-// Remove existing style elements created by this extension
 function removeExistingStyles() {
   const styles = document.querySelectorAll('[data-gaully-style]');
   styles.forEach(style => style.remove());
@@ -76,7 +71,7 @@ function applyColorblindFilter(mode) {
     if (mode === 'protanopia') {
       const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
       filter.id = 'protanopia';
-      // Protanopia filter matrix (simplified)
+      // Protanopia filter matrix 
       filter.innerHTML = `
         <feColorMatrix type="matrix"
           values="0.567, 0.433, 0, 0, 0
@@ -88,7 +83,7 @@ function applyColorblindFilter(mode) {
     } else if (mode === 'deuteranopia') {
       const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
       filter.id = 'deuteranopia';
-      // Deuteranopia filter matrix (simplified)
+      // Deuteranopia filter matrix
       filter.innerHTML = `
         <feColorMatrix type="matrix"
           values="0.625, 0.375, 0, 0, 0
@@ -100,7 +95,7 @@ function applyColorblindFilter(mode) {
     } else if (mode === 'tritanopia') {
       const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
       filter.id = 'tritanopia';
-      // Tritanopia filter matrix (simplified)
+      // Tritanopia filter matrix
       filter.innerHTML = `
         <feColorMatrix type="matrix"
           values="0.95, 0.05,  0,    0, 0
@@ -204,6 +199,7 @@ function applyHighContrast() {
   document.head.appendChild(style);
 }
 
+// Text-to-speech functionality
 let currentSpeech = null;
 
 function handleTextSelection(event) {
@@ -234,7 +230,7 @@ function speakText(text) {
 function readEntirePage() {
   const pageText = document.body.innerText || '';
   if (pageText.trim().length > 0) {
-    speakText(pageText.substring(0, 5000));
+    speakText(pageText.substring(0, 5000)); // Limit to 5000 chars
   }
 }
 
@@ -245,6 +241,7 @@ function stopSpeech() {
   }
 }
 
+// Listen for messages from popup
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   switch(request.action) {
     case 'applySettings':
