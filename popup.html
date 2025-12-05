@@ -1,57 +1,66 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Gaully</title>
+  <title>Gaully Accessibility</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1>Gaully</h1>
+      <p>Outils d'accessibilité</p>
+    </header>
 
-  <div class="gaul-container">
-
-    <div class="dropdown-section">
-      <button class="dropdown-btn">Accessibilité</button>
-      <div class="dropdown-content">
-
+    <section class="section">
+      <button class="section-header">Paramètres visuels</button>
+      <div class="section-content">
         <label>
-          <span>Mode daltonien :</span>
-          <select id="colorblindMode" class="gaul-input">
+          <span>Simulation daltonisme</span>
+          <select id="colorblindMode">
             <option value="none">Aucun</option>
             <option value="protanopia">Protanopie</option>
             <option value="deuteranopia">Deutéranopie</option>
             <option value="tritanopia">Tritanopie</option>
-            <option value="achromatopsia">Achromatopsie (niveaux de gris)</option>
+            <option value="achromatopsia">Achromatopsie</option>
           </select>
         </label>
 
-        <div class="checkbox-row">
-          <span>Police adaptée à la dyslexie</span>
-          <label class="switch">
-            <input type="checkbox" id="dyslexiaFont" class="checkbox">
-            <div class="slider"></div>
-          </label>
-        </div>
+        <label class="toggle">
+          <span>Police adaptée dyslexie</span>
+          <input type="checkbox" id="dyslexiaFont">
+          <span class="slider"></span>
+        </label>
 
-        <div class="checkbox-row">
-          <span>Mode contraste élevé</span>
-          <input type="checkbox" id="highContrast" class="checkbox">
-        </div>
-
-        <button id="saveSettings" class="gaul-button">Enregistrer les paramètres</button>
-
-        <div id="status"></div>
+        <label class="toggle">
+          <span>Contraste élevé</span>
+          <input type="checkbox" id="highContrast">
+          <span class="slider"></span>
+        </label>
       </div>
-    </div>
+    </section>
 
-    <div class="dropdown-section">
-      <button class="dropdown-btn">Autres fonctionnalités</button>
-      <div class="dropdown-content">
-        <p>Les futurs outils et paramètres apparaîtront ici</p>
+    <section class="section">
+      <button class="section-header">Lecture à voix haute</button>
+      <div class="section-content">
+        <label class="toggle">
+          <span>Lire la sélection au relâchement</span>
+          <input type="checkbox" id="ttsOnSelect">
+          <span class="slider"></span>
+        </label>
+        <div class="button-group">
+          <button id="readPage">Lire toute la page</button>
+          <button id="stopTts" class="secondary">Arrêter</button>
+        </div>
       </div>
-    </div>
+    </section>
 
+    <footer>
+      <button id="saveSettings" class="primary">Enregistrer et appliquer</button>
+      <div id="status"></div>
+    </footer>
   </div>
 
-<script src="popup.js"></script>
+  <script src="popup.js"></script>
 </body>
 </html>

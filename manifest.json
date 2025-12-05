@@ -1,19 +1,20 @@
 {
   "manifest_version": 3,
-  "name": "Gaully Extension",
-  "description": "A jolly Gaully!",
-  "version": "1.0",
+  "name": "Gaully Accessibility",
+  "description": "Accessibility tools: color-blindness simulation, dyslexia font, high contrast, and text-to-speech.",
+  "version": "2.0",
   "action": {
     "default_popup": "popup.html",
-    "default_icon": {
-    }
-  },
-  "icons": {
+    "default_title": "Gaully Accessibility"
   },
   "permissions": [
     "storage",
     "scripting",
-    "activeTab"
+    "activeTab",
+    "tts"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"
@@ -21,7 +22,14 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["filters.svg"],
+      "matches": ["<all_urls>"]
     }
   ]
 }
