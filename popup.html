@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Souveraineté Gauloise</title>
+  <title>Gaully</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,6 +12,7 @@
     <div class="dropdown-section">
       <button class="dropdown-btn">Accessibilité</button>
       <div class="dropdown-content">
+
         <label>
           <span>Mode daltonien :</span>
           <select id="colorblindMode" class="gaul-input">
@@ -23,32 +24,21 @@
           </select>
         </label>
 
-        <label class="checkbox-row">
-            <table>
-                <tr>
-                    <td><span>Police adaptée à la dyslexie</span></td>
-                    <td>
-                        <input type="checkbox" id="dyslexiaFont" class="checkbox">
-                        <div class="slider"></div>
-                    </td>
-                </tr>
-            </table>
+        <div class="checkbox-row">
+          <span>Police adaptée à la dyslexie</span>
+          <label class="switch">
+            <input type="checkbox" id="dyslexiaFont" class="checkbox">
+            <div class="slider"></div>
+          </label>
+        </div>
 
-        </label>
-
-        <label class="checkbox-row">
-            <table>
-                <tr>
-                    <td><span>Mode contraste élevé</span></td>
-                    <td><input type="range" id="highContrast" ></td>
-                </tr>
-            </table>
-            
-          
-          
-        </label>
+        <div class="checkbox-row">
+          <span>Mode contraste élevé</span>
+          <input type="checkbox" id="highContrast" class="checkbox">
+        </div>
 
         <button id="saveSettings" class="gaul-button">Enregistrer les paramètres</button>
+
         <div id="status"></div>
       </div>
     </div>
